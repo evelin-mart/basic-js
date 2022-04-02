@@ -14,7 +14,8 @@ const chainMaker = {
     return this;
   },
   removeLink(position) {
-    if (position < 1 || position > this.chain.length) {
+    if (!+position || position < 1 || position > this.chain.length) {
+      this.chain = [];
       throw new Error("You can't remove incorrect link!");
     } else {
       this.chain.splice(position - 1, 1);
@@ -26,7 +27,9 @@ const chainMaker = {
     return this;
   },
   finishChain() {
-    return this.chain.map((item) => `( ${item} )`).join("~~");
+    const str = this.chain.map((item) => `( ${item} )`).join("~~");
+    this.chain = [];
+    return str;
   },
 };
 
